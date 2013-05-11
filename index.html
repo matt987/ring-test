@@ -7,8 +7,10 @@
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-            <link rel="stylesheet" type="text/css" media="screen" href="/css/en/styles.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/en/responsiveslides.css" />
+            <link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/styles.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/responsiveslides.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/livedemo.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/colorbox.css" />
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" href="/css/ie.css" />
     <![endif]-->
@@ -20,12 +22,13 @@
         </script>
             
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/responsiveslides.js"></script>
-<script type="text/javascript" src="/js/slider.js"></script>
-<script type="text/javascript" src="/js/ringcaptcha.js"></script>
-<script type="text/javascript" src="/js/analytics.js"></script>
+<script type="text/javascript" src="assets/javascript/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="assets/javascript/responsiveslides.js"></script>
+<script type="text/javascript" src="assets/javascript/slider.js"></script>
+<script type="text/javascript" src="assets/javascript/ringcaptcha.js"></script>
+<script type="text/javascript" src="assets/javascript/analytics.js"></script>
     <script type="text/javascript">var _cmo = {form: '4f56ce14a6bd2a0001006bfe', text: 'Contact Us', align: 'right', valign: 'middle', lang: 'en', background_color: '#000000'}; (function() {var cms = document.createElement('script'); cms.type = 'text/javascript'; cms.async = true; cms.src = ('https:' == document.location.protocol ? 'https://d1uwd25yvxu96k.cloudfront.net' : 'http://static.contactme.com') + '/widgets/tab/v1/tab.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cms, s);})();</script>
-    <script type='text/javascript' src='https://api.handsetdetection.com/sites/js/31132.js'></script>
+    <script type='text/javascript' src='assets/javascript/31132.js'></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var stylesheet = (HandsetDetection.ismobile == true) ? '/css/hometitle-mobile.css' : '/css/hometitle.css';
@@ -57,7 +60,7 @@
 <body>
     <!---------------INICIO: header---------------->
     <div id="header">
-    	<div class="container">
+        <div class="container">
             <a href="http://ringcaptcha.com/en/"><img class="logo" src="/images/en/logo-big.png" /></a>
             
 <div class="nav" align="right">
@@ -73,7 +76,7 @@
   <li>
     <a href="http://ringcaptcha.com/en/pricing">Pricing</a>
   </li>
-  <li>
+  <li class="current">
     <a href="http://ringcaptcha.com/en/features/try">Demo</a>
   </li>
   <li class="external">
@@ -88,177 +91,71 @@
     </div>
     <!---------------FIN: header------------------->
 
-    <!-- ---------- INICIO: slider ----------------- -->
-<div id="slider">
+    
+<!------------INICIO: slider------------------->
+<div id="HeadTitle">
     <div class="container">
         <div class="col1">
-            <h1 class="hometitle shadowText"><span class="lightblue">Phone</span> verification for developers.</h1>
-            <h2>RingCaptcha brings phone verification to your web and mobile applications in just seconds.</h2>
-            <a href="http://manage.ringcaptcha.com/en/signup">
-                <div class="tryfreebt">
-                    <h1 class="shadowText">Try it Free</h1>
-                </div>
-            </a>
-            <p class="demotext">Or <a href="http://ringcaptcha.com/en/features/try">See a live demo of RingCaptcha</a></p>
-        </div>
-        <div class="col2">
-            <ul class="rslides" id="sliderphone">
-                <li><img src="/images/en/sliders/phone-slider-001.png" /></li>
-                <li><img src="/images/en/sliders/phone-slider-002.png" /></li>
-                <li><img src="/images/en/sliders/phone-slider-003.png" /></li>
-            </ul>
+            <h1>Demo.</h1>
         </div>
         <div class="clear"></div>
     </div>
 </div>
-<!-- -------------FIN: slider----------------- -->
-
-
-<!-- -------------INICIO: cuerpo----------------- -->
+<!---------------FIN: slider-------------------><!-- -------------INICIO: cuerpo----------------- -->
 <div id="cuerpo">
     <div class="top"></div>
-    <div class="container">
+    <div class="container" id="livedemo">
         <div class="FirstinfoHolder">
-    <a name="WhyRingcatpcha"></a>
-    <h1 id="WhyRingcatpcha" class="TittleHolder azul glowText"><strong>Why RingCaptcha?</strong></h1>
-    <div class="whycontainer">
-        <div class="whyholder"> <img src="/images/en/why-ringcaptcha/its-easy-to-use-icon.png" />
-            <h2>It's easy to use.</h2>
-            <div class="clear"></div>
-            <p>Adopting RingCaptcha is as simple as adding a few lines of code on your site/app.</p>
+            <h1 class="TittleHolder azul glowText">Try out our demo without any risk</h1>
         </div>
-        <div class="whyholder"> <img src="/images/en/why-ringcaptcha/its-user-friendly-icon.png" />
-            <h2>It's user friendly.</h2>
-            <div class="clear"></div>
-            <p>RingCaptcha has an easy and intuitive user experience which combined with our easy-to-install plugins enhances your user's experience.</p>
-        </div>
-        <div class="whyholder"> <img src="/images/en/why-ringcaptcha/its-secure.png" />
-            <h2>It's secure.</h2>
-            <div class="clear"></div>
-            <p>RingCaptcha keeps your community safe from malicious activity adding a new layer of protection between your app and your users.</p>
-        </div>
-        <div class="whyholder"> <img src="/images/en/why-ringcaptcha/its-usefull.png" />
-            <h2>It's useful.</h2>
-            <div class="clear"></div>
-            <p>RingCaptcha nurtures your user database by providing you with fresh and valuable information about your users & customers.</p>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <hr class="why" />
-    <div class="watchtittleholder">
-        <h2><span class="gris">Watch the</span> video</h2>
-    </div>
-    <div id="videoFrame">
-        <iframe src="http://player.vimeo.com/video/36160988?title=0&amp;byline=0&amp;portrait=0"  width="736" height="409"></iframe>
-    </div>
-    <div class="quoteWhy"> <p><strong>RingCaptcha</strong> is for everyone; regardless of industry or app size</p></div>
-</div>        <hr />
+        <hr class="nomargin" />
         <div class="infoHolder">
-            <div class="col1">
-                <h3 class="rojo"><img src="/images/en/icons/phone.png" align="absmiddle" /><strong>ACCURATE MOBILE DATA</strong></h3>
-                <p>Since the cell phone is anywhere now, and accompanies people throughout the day, we want you to take advantage of one of the world’s largest communication channels.</p>
-                <p><strong>With RingCaptcha you are able to improve your business profitability by nurturing your user database.</strong></p>
+            <p class="secondline"><strong>Phone verification is getting more and more popular. WhatsApp, Viber, Facebook... to name a few.</strong> <br />
+                <br/>See how easy it is to use Ringcaptcha and experience the end user process below.</p>
+        </div>
+        <div class="infoHolder" id="demos">
+            <div class="demoholder">
+                <h2 class="glowText">SMS</h2>
+                <img src="/images/en/livedemo/sms-livedemo.png" />
+                <a href="try/sms.html" class="livebutton">Live demo</a>
+                <p>User enters mobile phone number into our widget and instantly receives an SMS containing a temporary verification code.</p>
             </div>
-            <div class="col2">
-                <h3 class="verde">Leverage ANY phone to</h3>
-                <ul class="checks">
-                    <li>Mobile Marketing</li>
-                    <li>Validate online users (Social Gaming, Social Commerce, etc.)</li>
-                    <li>Verify Business ownership</li>
-                    <li>Validate Leads</li>
-                    <li>Verify user IDs (For mobile apps)</li>
-                </ul>
+            <div class="demoholder">
+                <h2 class="glowText">VOICE</h2>
+                <img src="/images/en/livedemo/voice-livedemo.png" />
+                <a href="try/voice" class="livebutton">Live demo</a>
+                <p>User enters mobile phone number into our widget and instantly receives a voice call containing a temporary verification code.</p>
             </div>
-            <div class="clear"></div>
+            <div class="demoholder">
+                <h2 class="glowText">Image Captcha</h2>
+                <img src="/images/en/livedemo/captcha-livedemo.png" />
+                <a href="try/image" class="livebutton">Live demo</a>
+                <p>Our widget shows a random string which the user has to type to submit a form.</p>
+            </div>
+        </div>
+        <div class="infoHolder lastp">
+            <h2>Keep the loyal audience in and the fake audience out.</h2>
+            <h3 class="azul">Simple, Reliable, Affordable.</h3>
+            <p>RingCaptcha helps you ensure that the people on your site are real by adding a extra layer of security to your app.<br/><br/>
+                Prevent spammers and fraudsters from abusing your site. Focus on growing your audience, we take care of the rest!</p>
         </div>
         <hr />
-        <div class="infoHolder">
-            <div class="col1">
-                <h3 class="rojo"><img src="/images/en/icons/lock.png" align="absmiddle" /><strong>SECURITY</strong></h3>
-                <p>Since spam and online fraud are moving from the inbox to a new battleground: social networks, classifieds, and any online community, it has become a top priority for webmasters to keep their users safe from fraudulent activity.</p>
-                <p><strong>With RingCaptcha you can identify and substantially reduce spam and online fraud on your web & mobile services.</strong></p>
-            </div>
-            <div class="col2">
-                <h3 class="verde">Leverage ANY phone to</h3>
-                <ul class="checks">
-                    <li>Secure eCommerce</li>
-                    <li>Stop Payment Fraud</li>
-                    <li>Protect Account Access</li>
-                    <li>Trusted Password Reset</li>
-                    <li>Prevent Bulk Registrations</li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <hr />
-        <div class="infoHolder">
-            <h3 class="rojo glowText"><img src="/images/en/icons/client.png" align="absmiddle" /><strong>OUR GREAT CUSTOMERS</strong></h3>
-        </div>
-        <div id="clients">
-            <ul class="slider">
-                <li class="slide">
-                    <ul>
-                        <li><a href="http://www.ropit.com.ar/" target="_blank"><img src="/images/en/clients/2.jpg" alt="Ropit" /></a></li>
-                        <li><a href="http://www.transportaronline.com/" target="_blank"><img src="/images/en/clients/3.jpg" alt="MercadoTransporte" /></a></li>
-                        <li><a href="http://www.loogares.com/" target="_blank"><img src="/images/en/clients/4.jpg" alt="Loogares" /></a></li>
-                        <li><a href="https://www.formafina.com.ar/" target="_blank"><img src="/images/en/clients/5.jpg" alt="Formafina" /></a></li>
-                        <li><a href="http://www.tiendanube.com/" target="_blank"><img src="/images/en/clients/6.jpg" alt="Tienda Nube" /></a></li>
-                        <li><a href="http://urbita.com/" target="_blank"><img src="/images/en/clients/7.jpg" alt="Urbita" /></a></li>
-                    </ul>
-                </li>
-                <li class="slide">
-                    <ul>
-                        <li><a href="http://www.wehostels.com/" target="_blank"><img src="/images/en/clients/8.jpg" alt="Wehostels.com" /></a></li>
-                        <li><a href="http://bixti.com/" target="_blank"><img src="/images/en/clients/9.jpg" alt="Bixti" /></a></li>
-                        <li><a href="https://trendsetters.com/" target="_blank"><img src="/images/en/clients/10.jpg" alt="TrendSetter" /></a></li>
-                        <li><a href="http://idea.me/" target="_blank"><img src="/images/en/clients/11.jpg" alt="Ideame" /></a></li>
-                        <li><a href="https://www.afluenta.com/" target="_blank"><img src="/images/en/clients/12.jpg" alt="Afluenta" /></a></li>
-                        <li><a href="https://www.workana.com/" target="_blank"><img src="/images/en/clients/15.jpg" alt="Workana" /></a></li>
-                    </ul>
-                </li>
-                <li class="slide">
-                    <ul>
-                        <li><a href="http://jampp.com/" target="_blank"><img src="/images/en/clients/22.jpg" alt="Jampp" /></a></li>
-                        <li><a href="http://www.fanwards.com/" target="_blank"><img src="/images/en/clients/23.jpg" alt="fanwards" /></a></li>
-                        <li><a href="http://comenta.tv/" target="_blank"><img src="/images/en/clients/24.jpg" alt="Comenta.tv" /></a></li>
-                        <li><a href="http://oony.com.ar/" target="_blank"><img src="/images/en/clients/26.jpg" alt="Oony" /></a></li>
-                        <li><a href="http://www.thefanmachine.com/" target="_blank"><img src="/images/en/clients/27.jpg" alt="The Fan Machine" /></a></li>
-                        <li><a href="http://www.thesocialradio.com/" target="_blank"><img src="/images/en/clients/28.jpg" alt="The social Radio" /></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <p>
-                <a href="#" id="clientPrev"> Previous</a>
-                <a href="#" id="clientNext">Next </a>
-            </p>
-        </div>
-    </div>
+<div class="holderGray">
+    <a class="btorange" href="http://manage.ringcaptcha.com/en/signup">sign up for a free account</a>
+</div>  </div>
 </div>
 <!-- -------------FIN: cuerpo----------------- -->
-
-<!-- -------------COMIENZO: featured----------------- -->
-<div id="featured">
-    <div class="background">
-        <h2>RingCaptcha has been featured in these fine publications.</h2>
-        <div class="logos">
-            <ul>
-                <li><div class="csharp"></div></li>
-                <li><div class="drupal"></div></li>
-                <li><div class="java"></div></li>
-                <li><div class="joomla"></div></li>
-                <li><div class="microsoft-net"></div></li>
-                <li><div class="php"></div></li>
-                <li><div class="phpbb"></div></li>
-                <li><div class="wordpress"></div></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="bottom"></div>
-</div>
-<!-- -------------FIN: featured----------------- -->
-
-
+<script type="text/javascript">
+$(document).ready(function () {
+    $(".livebutton").colorbox({
+        transition: 'elastic',
+        scrolling: false,
+        width:"672px",
+        height:"665px",
+        iframe: true
+    });
+});
+</script>
     <!---------------COMIENZO: Footer------------------->
     <div id="footer">
         <div class="container">
@@ -276,7 +173,7 @@
   <li>
     <a href="http://ringcaptcha.com/en/pricing">Pricing</a>
   </li>
-  <li>
+  <li class="current">
     <a href="http://ringcaptcha.com/en/features/try">Demo</a>
   </li>
   <li class="external">
