@@ -1,0 +1,90 @@
+#livedemo h1{
+	font-weight:bold;
+	font-size:2.4em
+}
+
+#livedemo p.secondline{
+	text-align:center;
+	font-size:1.2em;
+	color:#525252
+}
+#livedemo #demos .demoholder{
+	background:#e8e8e8;
+	width:274px;
+	height:377px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.13);
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.13);
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.13);
+	display:inline-block;
+	text-align:center;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	vertical-align:top
+}
+#livedemo #demos .demoholder:nth-child(2){
+	margin:0 46px
+}
+#livedemo #demos h2{
+	font-size:1.8em;
+	color:#000;
+	font-weight:bold;
+	margin:8px 0
+}
+#livedemo #demos .livebutton{
+	display: block;
+	background:#74cd78;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	color:#fff;
+	width:140px;
+	font-size:24px;
+	font-weight:bold;
+	border:0;
+	padding:7px 23px;
+	margin:20px auto;
+	cursor:pointer;
+	font-weight:normal; font-family:'Ubuntu', Lucida Grande, Arial, Helvetica, sans-serif;
+	-moz-box-shadow: 1px 3px 10px rgba(0,0,0,0.20);
+	box-shadow: 1px 3px 10px rgba(0,0,0,0.20);
+	-webkit-box-shadow: 1px 3px 10px rgba(0,0,0,0.20);
+	color:#FFF;
+	text-decoration:none;
+	font-weight:bold
+}
+#livedemo #demos .livebutton:hover{
+	background:#5eab61
+}
+#livedemo #demos p{
+	color:#303030;
+	text-align:left;
+	padding:10px 20px 
+}
+#livedemo .lastp{
+	text-align:center;
+	padding:60px 20px 0
+}
+#livedemo .lastp h2{
+	font-weight:bold;
+	font-size:1.65em;
+	color:#303030;
+	width:600px;
+	letter-spacing:-1px;
+	margin:auto
+}
+#livedemo .lastp p{
+	margin:20px auto;
+	width:500px;
+	line-height:18px
+}
+#livedemo .lastp h3 {
+	font-size:1.5em;
+}
