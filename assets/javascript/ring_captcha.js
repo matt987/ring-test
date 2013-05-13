@@ -1,3 +1,22 @@
+var RingcaptchaStatus = {
+site: '3i5ity1u8olima5e4i6e',
+session: 'b67ded265e7af95c0f78131dc41399a0f346a10c',
+token: 'b67ded265e7af95c0f78131dc41399a0f346a10c',
+type: 'SMS',
+lang: 'es',
+country: 'PY',
+server: '//api.ringcaptcha.com/',
+status: 'NEW',
+geolocation: 1,
+message: '',
+timer: 30
+};
+document.write('<scr'+'ipt type="text/javascript" s'+'rc="' + RingcaptchaStatus.server + 'js/ringcaptcha_sms.js?sid=b67ded265e7af95c0f78131dc41399a0f346a10c"></scr'+'ipt>'); 
+
+
+
+
+
 var RingcaptchaTemplates = {};
 RingcaptchaTemplates.PhoneHtml = '<div id="ringcaptcha"> <span id="ringcaptcha_brand_logo"></span> <span id="ringcaptcha_title"></span> <div id="ringcaptcha_phone_container"> <div id="ringcaptcha_country_selector"> <div id="ringcaptcha_country_flag"></div> <div id="ringcaptcha_country_code"></div><input type="hidden" id="ringcaptcha_country_code_o" value=""> </div> <div id="ringcaptcha_country_dropdown"></div> <input id="ringcaptcha_user_phone" name="ringcaptcha_user_phone" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" /> </div> <a id="ringcaptcha_verify_button" href="#"></a> <span id="ringcaptcha_instruction"></span> </div>';
 RingcaptchaTemplates.PinHtml = '<div id="ringcaptcha"> <span id="ringcaptcha_brand_logo"></span> <span id="ringcaptcha_title"></span> <div id="ringcaptcha_pin_container"> <input id="ringcaptcha_pin_code" name="ringcaptcha_pin_code" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" /> </div> <div id="ringcaptcha_toolbar"> <a id="ringcaptcha_help_button" href="javascript:void(0)"></a> <a id="ringcaptcha_reload_button" href="#"></a> <div id="ringcaptcha_timer"></div> </div> <div class="clear"></div> <div id="ringcaptcha_pin_instruction"><div id="ringcaptcha_enterpin"></div></div><span id="ringcaptcha_help_text"></span> </div>';
@@ -452,7 +471,7 @@ var a = Ringcaptcha.$,
 	y = a('ringcaptcha_country_code_o').value,
 	z = a('ringcaptcha_example_phone'),
 	g = y + f.value.trim();
-	
+
 if (!Ringcaptcha.isPhoneValid(f.value) || (f.value.length <=4)) {
 	z.className = 'helptxt helptxterr';
 	f.className = "error";
