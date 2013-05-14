@@ -50,7 +50,7 @@
   <script type="text/javascript">
     Ringcaptcha.$ = function (a) {
       return typeof a == "string" ? document.getElementById(a) : a
-      document.body.dispatchEvent(Ringcaptcha.widgedDisplayedEvent);
+      document.body.dispatchEvent(RingcaptchaEvents.widgedDisplayedEvent);
     }
     Ringcaptcha.reload = function () {
         var a = RingcaptchaStatus, b, c = Ringcaptcha.$, f;
@@ -83,7 +83,7 @@
     var a = /^\+?([0-9])*$/;
     p = p.trim();
     bool = (p.length && p.match(a));
-    if (!bool) document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+    if (!bool) document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
     return bool;
   }
 
@@ -129,7 +129,7 @@
           Ringcaptcha._render_pin_slide(r);
           break;
           case "ERROR":
-          document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+          document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
           var g = Ringcaptcha.$('ringcaptcha_user_phone');
           Ringcaptcha.verifyClicked = false;
           g.className = "error";
@@ -154,7 +154,7 @@
       },
       error: function (jx) {
         Ringcaptcha.verifyClicked = false;
-        document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+        document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
       }
     });
     b.send(f);
