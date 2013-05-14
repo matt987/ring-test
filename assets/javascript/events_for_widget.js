@@ -26,3 +26,8 @@ RingcaptchaEvents = {
     }
   }),
 };
+
+
+$.fn.onInvalidNumberEnteredEvent = function(custom_function){  
+  $(this).addEventListener("onInvalidNumberEntered",  custom_function()});  
+};  

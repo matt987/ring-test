@@ -236,6 +236,10 @@ Ringcaptcha._render_phone_slide();
       console.info("Custom data is: ", e.detail);
     });
 
+    $('body').onInvalidNumberEnteredEvent(function(){
+      alert("Invalid number from jquery");
+    })
+
     document.body.addEventListener("onWidgetDisplayed", function(e) {
       // Obtenemos como parámetro el Evento (e)
       console.info("Event is: ", e);
