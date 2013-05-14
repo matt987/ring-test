@@ -90,7 +90,7 @@ if (Ringcaptcha.widget) {
 e.callback && e.callback()
 }
   
-Ringcaptcha._render_phone_slide();
+Ringcaptcha.widget = Ringcaptcha.$("ringcaptcha_widget"); Ringcaptcha.init_callback();
 
   Ringcaptcha.processPhoneNumber = function (e) {
     document.getElementById("ringcaptcha_verify_button").focus();
