@@ -75,14 +75,52 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
+    Ringcaptcha.init_callback = function () {
+      Ringcaptcha._reset_timer();
+      RingcaptchaStr = Ringcaptcha._hash_merge([RingcaptchaStr_en, RingcaptchaLangMap[RingcaptchaStatus.lang] || {},
+        RingcaptchaOptions.custom_translations || {}]);
+      switch (RingcaptchaStatus.status) {
+        case 'PENDING':
+        Ringcaptcha._render_pin_slide({phone: RingcaptchaStatus.message, timeout: 0});
+        break;
+        case 'LAST':
+        Ringcaptcha._render_pin_slide({phone: RingcaptchaStatus.message, timeout: null});
+        break;
+        case 'SESSION_FAILED':
+        case 'OUT_OF_CREDIT':
+        case 'ERROR_INVALID_DOMAIN':
+        Ringcaptcha._render_error_slide({message: RingcaptchaStatus.status}, false);
+        break;
+        case 'ERROR_INVALID_SESSION':
+        case 'ERROR_INVALID_SITE_KEY':
+        case 'ERROR_INVALID_SERVICE':
+        Ringcaptcha._render_error_slide({message: RingcaptchaStatus.status, message: RingcaptchaStatus.message}, true);
+        break;
+        default:
+        Ringcaptcha._render_phone_slide();
+        if (RingcaptchaStatus.geolocation) {
+          Ringcaptcha.getGeolocation();
+        }
+      }
+      document.body.dispatchEvent(RingcaptchaEvents.widgedDisplayedEvent);
+    }
+
 
     document.body.addEventListener("onRetryRequested", function(e) {
       // Obtenemos como parámetro el Evento (e)
       console.info("Event is: ", e);
-      alert("It works");
+      alert("Retry event");
       // Además, disponemos de información extra.
       console.info("Custom data is: ", e.detail);
     });
+
+    document.body.addEventListener("onWidgetDisplayed", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Displayed event");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });    
   </script>
 
 
