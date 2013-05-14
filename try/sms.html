@@ -7,11 +7,10 @@
   <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/styles.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/stylesheets/responsiveslides.css" />
-
+  <link rel="stylesheet" type="text/css" media="screen" href="../assets/stylesheets/styles.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../assets/stylesheets/responsiveslides.css" />
     <!--[if IE]>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/ie.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/ie.css" />
     <![endif]-->
 
 
@@ -21,14 +20,16 @@
     </script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/javascript/responsiveslides.js"></script>
-    <script type="text/javascript" src="assets/javascript/slider.js"></script>
-    <script type="text/javascript" src="assets/javascript/ringcaptcha.js"></script>
-    <script type="text/javascript" src="assets/javascript/analytics.js"></script>
-    <script type='text/javascript' src='assets/javascript/31132.js'></script>
+    <script type="text/javascript" src="../assets/javascript/responsiveslides.js"></script>
+    <script type="text/javascript" src="../assets/javascript/slider.js"></script>
+    <script type="text/javascript" src="../assets/javascript/ringcaptcha.js"></script>
+    <script type="text/javascript" src="../assets/javascript/analytics.js"></script>
+    <script type='text/javascript' src='../assets/javascript/31132.js'></script>
+    <script type='text/javascript' src='../assets/javascript/events_for_widget.js'></script>
+    
     <script type="text/javascript">
     $(document).ready(function() {
-      var stylesheet = (HandsetDetection.ismobile == true) ? 'assets/stylesheets/hometitle-mobile.css' : 'assets/stylesheets/hometitle.css';
+      var stylesheet = (HandsetDetection.ismobile == true) ? '../assets/stylesheets/hometitle-mobile.css' : '../assets/stylesheets/hometitle.css';
 
       $("<link>")
       .appendTo($('head'))
@@ -45,6 +46,144 @@
           <script type="text/javascript" charset="UTF-8" src="http://api.ringcaptcha.com/widget/3i5ity1u8olima5e4i6e"></script>
       </div>
     </form>
+
+  <script type="text/javascript">
+    Ringcaptcha.$ = function (a) {
+      return typeof a == "string" ? document.getElementById(a) : a
+      document.body.dispatchEvent(RingcaptchaEvents.widgedDisplayedEvent);
+    }
+    Ringcaptcha.reload = function () {
+        var a = RingcaptchaStatus, b, c = Ringcaptcha.$, f;
+        if (c('ringcaptcha_reload_button')) {
+          c('ringcaptcha_reload_button').onmouseover = null;
+          c('ringcaptcha_reload_button').onmouseout = null;
+        }
+        f = 'sid=' + a.session;
+        // Create XMLHttpRequest
+        b = Ringcaptcha._ajax('POST', a.server + a.site + '/captcha', {
+          success: function (jx) {
+            var c = JSON.parse(jx.responseText);
+            if (c.result == "ERROR") {
+              Ringcaptcha._render_error_slide(c, true);
+              return false;
+            }
+            RingcaptchaStatus = c;
+            Ringcaptcha.verifyClicked = false;
+            Ringcaptcha.init_callback();
+          },
+          error: function (jx) {
+            Ringcaptcha.init_callback();
+          }
+        });
+        b.send(f);
+        document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
+      }
+
+
+  Ringcaptcha.processPhoneNumber = function (e) {
+    document.getElementById("ringcaptcha_verify_button").focus();
+    (typeof window.console !== 'undefined') && console.log('Verify clicked!');
+    if (Ringcaptcha.verifyClicked) {
+    //(e) && (!Ringcaptcha._is_ie()) && e.preventDefault();
+    return !1;
+    }
+    Ringcaptcha.verifyClicked = true;
+    var a = Ringcaptcha.$,
+    b = /^\+?([0-9])*$/,
+    c = RingcaptchaStatus,
+    d = a('ringcaptcha_user_country'), f = a('ringcaptcha_user_phone'),
+    y = a('ringcaptcha_country_code_o').value,
+    z = a('ringcaptcha_example_phone'),
+    g = y + f.value.trim();
+    if (!Ringcaptcha.isPhoneValid(f.value) || (f.value.length <=4)) {
+      document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
+      z.className = 'helptxt helptxterr';
+      f.className = "error";
+      f.value = RingcaptchaStr.invalid_phone;
+      f.onclick = (function(){if(z.className != 'helptxt'){f.value = ''; f.className = ''; z.className = 'helptxt'} });
+      f.onfocus = (function(){if(z.className != 'helptxt'){f.value = ''; f.className = ''; z.className = 'helptxt'} });
+      Ringcaptcha.verifyClicked = false;
+      (e) && (!Ringcaptcha._is_ie()) && e.preventDefault();
+      
+      return !1
+    } //Invalid characters
+    // Building URL
+    f = 'token=' + c.session + '&phone=' + encodeURIComponent(g) + '&country=' + encodeURIComponent(d.value);
+    if (c.geolocation) {
+      f += '&geo_lat=' + encodeURIComponent(c.geoLat) + '&geo_lng=' + encodeURIComponent(c.geoLng);
+      f += '&geo_accuracy=' + encodeURIComponent(c.geoAccuracy) + '&geo_alt=' + encodeURIComponent(c.geoAlt);
+      f += '&geo_alt_accuracy=' + encodeURIComponent(c.geoAltAccuracy);
+    }
+    // Create XMLHttpRequest
+    b = Ringcaptcha._ajax('POST', c.server + c.site + '/code', {
+      success: function (jx) {
+        var r = JSON.parse(jx.responseText);
+        switch (r.status) {
+          case "SUCCESS":
+          Ringcaptcha._render_pin_slide(r);
+          break;
+          case "ERROR":
+          document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
+          var g = Ringcaptcha.$('ringcaptcha_user_phone');
+          Ringcaptcha.verifyClicked = false;
+          g.className = "error";
+          switch(r.message) {
+            case "ERROR_INVALID_NUMBER":
+            g = RingcaptchaStr.invalid_phone;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            case "ERROR_COUNTRY_NOT_SUPPORTED":
+            g = RingcaptchaStr.invalid_country;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            case "ERROR_INVALID_NUMBER_LENGTH":
+            g = RingcaptchaStr.invalid_phone_length;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            default:
+            Ringcaptcha._render_error_slide(r, true);
+          }
+          break;
+        }
+      },
+      error: function (jx) {
+        Ringcaptcha.verifyClicked = false;
+        document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
+      }
+    });
+    b.send(f);
+    return !1
+    }
+
+
+
+
+    document.body.addEventListener("onRetryRequested", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Retry event");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });
+
+    document.body.addEventListener("onInvalidNumberEntered", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Invalid number");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });
+
+    document.body.addEventListener("onWidgetDisplayed", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Displayed event");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });    
+  </script>
+
+
   </body>
 
   </html>
