@@ -20,7 +20,7 @@ RingcaptchaEvents = {
   }),
 
   //onInvalidNumberEntered: cuando un numero invalido fue ingresado
-  invalidNumberEntered: new CustomEvent("onInvalidNumberEntered", {
+  invalidNumberEnteredEvent: new CustomEvent("onInvalidNumberEntered", {
     detail: {
       name: "Invalid number entered"
     }
@@ -29,4 +29,4 @@ RingcaptchaEvents = {
 
 
 // Ejecutamos el evento
-//document.body.dispatchEvent(myEvent);
+//document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);

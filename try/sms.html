@@ -75,41 +75,50 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
-    Ringcaptcha.init_callback = function () {
-      Ringcaptcha._reset_timer();
-      RingcaptchaStr = Ringcaptcha._hash_merge([RingcaptchaStr_en, RingcaptchaLangMap[RingcaptchaStatus.lang] || {},
-        RingcaptchaOptions.custom_translations || {}]);
-      switch (RingcaptchaStatus.status) {
-        case 'PENDING':
-        Ringcaptcha._render_pin_slide({phone: RingcaptchaStatus.message, timeout: 0});
-        break;
-        case 'LAST':
-        Ringcaptcha._render_pin_slide({phone: RingcaptchaStatus.message, timeout: null});
-        break;
-        case 'SESSION_FAILED':
-        case 'OUT_OF_CREDIT':
-        case 'ERROR_INVALID_DOMAIN':
-        Ringcaptcha._render_error_slide({message: RingcaptchaStatus.status}, false);
-        break;
-        case 'ERROR_INVALID_SESSION':
-        case 'ERROR_INVALID_SITE_KEY':
-        case 'ERROR_INVALID_SERVICE':
-        Ringcaptcha._render_error_slide({message: RingcaptchaStatus.status, message: RingcaptchaStatus.message}, true);
-        break;
-        default:
-        Ringcaptcha._render_phone_slide();
-        if (RingcaptchaStatus.geolocation) {
-          Ringcaptcha.getGeolocation();
-        }
-      }
-      document.body.dispatchEvent(RingcaptchaEvents.widgedDisplayedEvent);
+  Ringcaptcha._ajax = function (m, u, o) {
+    var jx = false;
+    if (Ringcaptcha._is_ie() && typeof XDomainRequest != "undefined") {
+      jx = new XDomainRequest();
+      jx.open(m, u);
+      jx.onload = function() { (typeof o.success != "undefined") && o.success(jx) };
+      jx.onerror = function() { (typeof o.error != "undefined") && o.error(jx) };
+    } else {
+      jx = new XMLHttpRequest();
+      jx.open(m, u, true);
+      jx.setRequestHeader("Content-Type","text/plain");
+      jx.onreadystatechange = function() {
+        if(jx.readyState == 4 && jx.status == 200 && typeof o.success !== "undefined"){ 
+          o.success(jx);
+          document.body.dispatchEvent(Ringcaptcha.widgedDisplayedEvent);
+        }else if(jx.readyState == 4 && typeof o.error !== "undefined") o.error(jx);
+      };
     }
+    return jx;
+  };
+
+  Ringcaptcha.isPhoneValid = function (p) {
+    var a = /^\+?([0-9])*$/;
+    p = p.trim();
+    bool = (p.length && p.match(a));
+    if (!bool) document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+    return bool;
+  }
+
+
 
 
     document.body.addEventListener("onRetryRequested", function(e) {
       // Obtenemos como parámetro el Evento (e)
       console.info("Event is: ", e);
       alert("Retry event");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });
+
+    document.body.addEventListener("onInvalidNumberEntered", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Invalid number");
       // Además, disponemos de información extra.
       console.info("Custom data is: ", e.detail);
     });
