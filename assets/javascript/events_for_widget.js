@@ -29,4 +29,4 @@ RingcaptchaEvents = {
 
 
 // Ejecutamos el evento
-//document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+//document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
