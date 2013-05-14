@@ -134,8 +134,9 @@
       //if (e.tabindex && (a("ringcaptcha_user_phone").tabIndex = e.tabindex, Ringcaptcha.theme != "custom")) a("ringcaptcha_verify_button").tabIndex = e.tabindex;
       if (Ringcaptcha.widget) {
         Ringcaptcha.widget.style.display = ""
-        document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
+        
       };
+      document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
       e.callback && e.callback()
       }
 
