@@ -26,7 +26,3 @@ RingcaptchaEvents = {
     }
   }),
 };
-
-
-// Ejecutamos el evento
-//document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
