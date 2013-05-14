@@ -75,10 +75,6 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
-  /*Ringcaptcha.$ = function (a) {
-      return typeof a == "string" ? document.getElementById(a) : a
-      document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
-    }*/
     
     Ringcaptcha._render_phone_slide = function () {
   var a = Ringcaptcha.$,
@@ -146,7 +142,7 @@ if (Ringcaptcha.widget) {
 e.callback && e.callback()
 }
   
-
+Ringcaptcha.init_callback();
   Ringcaptcha.processPhoneNumber = function (e) {
     document.getElementById("ringcaptcha_verify_button").focus();
     (typeof window.console !== 'undefined') && console.log('Verify clicked!');
