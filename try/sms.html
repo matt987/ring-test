@@ -129,6 +129,7 @@
           Ringcaptcha._render_pin_slide(r);
           break;
           case "ERROR":
+          document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
           var g = Ringcaptcha.$('ringcaptcha_user_phone');
           Ringcaptcha.verifyClicked = false;
           g.className = "error";
@@ -147,7 +148,6 @@
             break;
             default:
             Ringcaptcha._render_error_slide(r, true);
-            document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
           }
           break;
         }
