@@ -218,6 +218,28 @@ Ringcaptcha._render_phone_slide();
     }
 
 
+    Ringcaptcha._ajax = function (m, u, o) {
+      var jx = false;
+      if (Ringcaptcha._is_ie() && typeof XDomainRequest != "undefined") {
+        jx = new XDomainRequest();
+        jx.open(m, u);
+        jx.onload = function() { (typeof o.success != "undefined") && o.success(jx) };
+        jx.onerror = function() { (typeof o.error != "undefined") && o.error(jx) };
+      } else {
+        jx = new XMLHttpRequest();
+        jx.open(m, u, true);
+        jx.setRequestHeader("Content-Type","text/plain");
+        jx.onreadystatechange = function() {
+          if(jx.readyState == 4 && jx.status == 200 && typeof o.success !== "undefined"){ 
+            document.body.dispatchEvent(RingcaptchaEvents.successfulPinRequestSentEvent);
+            o.success(jx);
+            
+          }else if(jx.readyState == 4 && typeof o.error !== "undefined") o.error(jx);
+        };
+      }
+      return jx;
+    }
+
 
 
     document.body.addEventListener("onRetryRequested", function(e) {
@@ -244,6 +266,14 @@ Ringcaptcha._render_phone_slide();
       // Además, disponemos de información extra.
       console.info("Custom data is: ", e.detail);
     });    
+
+    document.body.addEventListener("onSuccessfulPinRequestSent", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("Successful pin request sent");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });  
   </script>
 
 
