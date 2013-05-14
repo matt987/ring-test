@@ -48,6 +48,10 @@
     </form>
 
   <script type="text/javascript">
+    Ringcaptcha.$ = function (a) {
+      return typeof a == "string" ? document.getElementById(a) : a
+      document.body.dispatchEvent(Ringcaptcha.widgedDisplayedEvent);
+    }
     Ringcaptcha.reload = function () {
         var a = RingcaptchaStatus, b, c = Ringcaptcha.$, f;
         if (c('ringcaptcha_reload_button')) {
@@ -75,27 +79,6 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
-  Ringcaptcha._ajax = function (m, u, o) {
-    var jx = false;
-    if (Ringcaptcha._is_ie() && typeof XDomainRequest != "undefined") {
-      jx = new XDomainRequest();
-      jx.open(m, u);
-      jx.onload = function() { (typeof o.success != "undefined") && o.success(jx) };
-      jx.onerror = function() { (typeof o.error != "undefined") && o.error(jx) };
-    } else {
-      jx = new XMLHttpRequest();
-      jx.open(m, u, true);
-      jx.setRequestHeader("Content-Type","text/plain");
-      jx.onreadystatechange = function() {
-        if(jx.readyState == 4 && jx.status == 200 && typeof o.success !== "undefined"){ 
-          o.success(jx);
-          document.body.dispatchEvent(Ringcaptcha.widgedDisplayedEvent);
-        }else if(jx.readyState == 4 && typeof o.error !== "undefined") o.error(jx);
-      };
-    }
-    return jx;
-  };
-
   Ringcaptcha.isPhoneValid = function (p) {
     var a = /^\+?([0-9])*$/;
     p = p.trim();
@@ -103,6 +86,80 @@
     if (!bool) document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
     return bool;
   }
+
+  Ringcaptcha.processPhoneNumber = function (e) {
+    document.getElementById("ringcaptcha_verify_button").focus();
+    (typeof window.console !== 'undefined') && console.log('Verify clicked!');
+    if (Ringcaptcha.verifyClicked) {
+    //(e) && (!Ringcaptcha._is_ie()) && e.preventDefault();
+    return !1;
+    }
+    Ringcaptcha.verifyClicked = true;
+    var a = Ringcaptcha.$,
+    b = /^\+?([0-9])*$/,
+    c = RingcaptchaStatus,
+    d = a('ringcaptcha_user_country'), f = a('ringcaptcha_user_phone'),
+    y = a('ringcaptcha_country_code_o').value,
+    z = a('ringcaptcha_example_phone'),
+    g = y + f.value.trim();
+    if (!Ringcaptcha.isPhoneValid(f.value) || (f.value.length <=4)) {
+      z.className = 'helptxt helptxterr';
+      f.className = "error";
+      f.value = RingcaptchaStr.invalid_phone;
+      f.onclick = (function(){if(z.className != 'helptxt'){f.value = ''; f.className = ''; z.className = 'helptxt'} });
+      f.onfocus = (function(){if(z.className != 'helptxt'){f.value = ''; f.className = ''; z.className = 'helptxt'} });
+      Ringcaptcha.verifyClicked = false;
+      (e) && (!Ringcaptcha._is_ie()) && e.preventDefault();
+      
+      return !1
+    } //Invalid characters
+    // Building URL
+    f = 'token=' + c.session + '&phone=' + encodeURIComponent(g) + '&country=' + encodeURIComponent(d.value);
+    if (c.geolocation) {
+      f += '&geo_lat=' + encodeURIComponent(c.geoLat) + '&geo_lng=' + encodeURIComponent(c.geoLng);
+      f += '&geo_accuracy=' + encodeURIComponent(c.geoAccuracy) + '&geo_alt=' + encodeURIComponent(c.geoAlt);
+      f += '&geo_alt_accuracy=' + encodeURIComponent(c.geoAltAccuracy);
+    }
+    // Create XMLHttpRequest
+    b = Ringcaptcha._ajax('POST', c.server + c.site + '/code', {
+      success: function (jx) {
+        var r = JSON.parse(jx.responseText);
+        switch (r.status) {
+          case "SUCCESS":
+          Ringcaptcha._render_pin_slide(r);
+          break;
+          case "ERROR":
+          var g = Ringcaptcha.$('ringcaptcha_user_phone');
+          Ringcaptcha.verifyClicked = false;
+          g.className = "error";
+          switch(r.message) {
+            case "ERROR_INVALID_NUMBER":
+            g = RingcaptchaStr.invalid_phone;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            case "ERROR_COUNTRY_NOT_SUPPORTED":
+            g = RingcaptchaStr.invalid_country;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            case "ERROR_INVALID_NUMBER_LENGTH":
+            g = RingcaptchaStr.invalid_phone_length;
+            Ringcaptcha.m_errorShow(g);
+            break;
+            default:
+            Ringcaptcha._render_error_slide(r, true);
+            document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+          }
+          break;
+        }
+      },
+      error: function (jx) {
+        Ringcaptcha.verifyClicked = false;
+        document.body.dispatchEvent(Ringcaptcha.invalidNumberEnteredEvent);
+      }
+    });
+    b.send(f);
+    return !1
+    }
 
 
 
