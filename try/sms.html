@@ -75,11 +75,74 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
-  Ringcaptcha.$ = function (a) {
+  /*Ringcaptcha.$ = function (a) {
       return typeof a == "string" ? document.getElementById(a) : a
-      document.body.dispatchEvent(RingcaptchaEvents.widgedDisplayedEvent);
-    }
+      document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
+    }*/
     
+    _render_phone_slide: function () {
+  var a = Ringcaptcha.$,
+  b = RingcaptchaStr,
+  c = RingcaptchaStatus,
+  c = c.server,
+  d, e = RingcaptchaOptions;
+  c[c.length - 1] == "/" && (c = c.substring(0, c.length - 1));
+  var f = c + "/images/widget/";
+  c = RingcaptchaTemplates.AllCss + RingcaptchaTemplates.CountryCSS;
+  d = RingcaptchaTemplates.PhoneHtml;
+  c = c.replace(/IMGROOT\//g, f);
+  c = c.replace(/IMGLABEL\//g, f);
+  Ringcaptcha._set_styles(c);
+  Ringcaptcha.widget.innerHTML = d;
+  a('ringcaptcha_title') && a('ringcaptcha_title').appendChild(document.createTextNode(b.title));
+  a('ringcaptcha_instruction') && a('ringcaptcha_instruction').appendChild(document.createTextNode(b.description));
+  a('ringcaptcha_verify_button') && a('ringcaptcha_verify_button').appendChild(document.createTextNode(b.verify_button));
+//creo el ? de ayuda y el ex:
+v1 = document.createElement('a');
+v1.id="ringcaptcha_example_phone";
+v1.href = "javascript:Ringcaptcha.showHelp()";
+v1.title = b.help_button;
+v1.className = 'helptxt';
+v1.innerHTML = '(?)';
+a('ringcaptcha_title') && a('ringcaptcha_title').appendChild(v1);
+s1 = document.createElement('a');
+s1.id = 'selectExample';
+s1.className = 'helptxt helptxtex';
+a('ringcaptcha_title') && a('ringcaptcha_title').appendChild(s1);
+//---------------------
+c = document.createElement('input');
+c.type = "hidden";
+c.id = "ringcaptcha_session_id";
+c.name = "ringcaptcha_session_id";
+c.value = RingcaptchaStatus.session;
+d = document.createElement('input');
+d.type = "hidden";
+d.id = "ringcaptcha_user_country";
+d.name = "ringcaptcha_user_country";
+a('ringcaptcha_phone_container') && a('ringcaptcha_phone_container').appendChild(c);
+a('ringcaptcha_phone_container') && a('ringcaptcha_phone_container').appendChild(d);
+//a('ringcaptcha_user_phone').onfocus = Ringcaptcha.fillWithCountry;
+a('ringcaptcha_verify_button').href = "javascript:void(0)";
+a('ringcaptcha_verify_button').onclick = function () {
+  Ringcaptcha.processPhoneNumber(e);
+};
+a('ringcaptcha_user_phone').onkeypress = Ringcaptcha._process_key;
+a('ringcaptcha_user_phone').onkeypress = Ringcaptcha.m_isPhoneValid;
+//a('ringcaptcha_user_phone').onkeyup = Ringcaptcha.guessCountry;
+//a('ringcaptcha_user_phone').onblur = Ringcaptcha.searchCountry;
+a('ringcaptcha_country_selector').onclick = function () {
+  a('ringcaptcha_country_dropdown').style.display = "block";
+  a('inputSearchCountry').focus();
+};
+Ringcaptcha._build_country_dropdown();
+Ringcaptcha.fillWithCountry();
+//if (e.tabindex && (a("ringcaptcha_user_phone").tabIndex = e.tabindex, Ringcaptcha.theme != "custom")) a("ringcaptcha_verify_button").tabIndex = e.tabindex;
+if (Ringcaptcha.widget) {
+  Ringcaptcha.widget.style.display = ""
+  document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
+};
+e.callback && e.callback()
+}
   
 
   Ringcaptcha.processPhoneNumber = function (e) {

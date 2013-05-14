@@ -1,5 +1,5 @@
 RingcaptchaEvents = {
-  widgedDisplayedEvent: new CustomEvent("onWidgetDisplayed", {
+  widgetDisplayedEvent: new CustomEvent("onWidgetDisplayed", {
     detail: {
       name: "Widget displayed"
     }
