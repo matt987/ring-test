@@ -25,6 +25,8 @@
     <script type="text/javascript" src="assets/javascript/ringcaptcha.js"></script>
     <script type="text/javascript" src="assets/javascript/analytics.js"></script>
     <script type='text/javascript' src='assets/javascript/31132.js'></script>
+    <script type='text/javascript' src='assets/javascript/events_for_widget.js'></script>
+    
     <script type="text/javascript">
     $(document).ready(function() {
       var stylesheet = (HandsetDetection.ismobile == true) ? 'assets/stylesheets/hometitle-mobile.css' : 'assets/stylesheets/hometitle.css';
@@ -41,10 +43,49 @@
     <form id="demo_form" action="http://ringcaptcha.com/en/features/try/sms" method="post" style="float:left;">
       <div id="formcont" class="form_theme_blue">
           <p style="font-size:12px;">please provide a valid phone number.<br />Make sure you have access to your phone.</p>
-          <!--<script type="text/javascript" charset="UTF-8" src="http://api.ringcaptcha.com/widget/3i5ity1u8olima5e4i6e"></script>-->
-          <script type="text/javascript" charset="UTF-8" src="assets/javascript/ring_captcha.js"></script>
+          <script type="text/javascript" charset="UTF-8" src="http://api.ringcaptcha.com/widget/3i5ity1u8olima5e4i6e"></script>
       </div>
     </form>
+
+  <script type="text/javascript">
+    Ringcaptcha.reload = function () {
+        var a = RingcaptchaStatus, b, c = Ringcaptcha.$, f;
+        if (c('ringcaptcha_reload_button')) {
+          c('ringcaptcha_reload_button').onmouseover = null;
+          c('ringcaptcha_reload_button').onmouseout = null;
+        }
+        f = 'sid=' + a.session;
+        // Create XMLHttpRequest
+        b = Ringcaptcha._ajax('POST', a.server + a.site + '/captcha', {
+          success: function (jx) {
+            var c = JSON.parse(jx.responseText);
+            if (c.result == "ERROR") {
+              Ringcaptcha._render_error_slide(c, true);
+              return false;
+            }
+            RingcaptchaStatus = c;
+            Ringcaptcha.verifyClicked = false;
+            Ringcaptcha.init_callback();
+          },
+          error: function (jx) {
+            Ringcaptcha.init_callback();
+          }
+        });
+        b.send(f);
+        document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
+      }
+
+
+    document.body.addEventListener("onWidgetDisplayed", function(e) {
+      // Obtenemos como parámetro el Evento (e)
+      console.info("Event is: ", e);
+      alert("It works");
+      // Además, disponemos de información extra.
+      console.info("Custom data is: ", e.detail);
+    });
+  </script>
+
+
   </body>
 
   </html>
