@@ -138,8 +138,10 @@ Ringcaptcha._build_country_dropdown();
 Ringcaptcha.fillWithCountry();
 //if (e.tabindex && (a("ringcaptcha_user_phone").tabIndex = e.tabindex, Ringcaptcha.theme != "custom")) a("ringcaptcha_verify_button").tabIndex = e.tabindex;
 if (Ringcaptcha.widget) {
+  alert("ARRIBA")
   Ringcaptcha.widget.style.display = ""
   document.body.dispatchEvent(RingcaptchaEvents.widgetDisplayedEvent);
+  ALERT("aBAJO")
 };
 e.callback && e.callback()
 }
