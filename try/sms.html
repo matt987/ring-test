@@ -231,7 +231,7 @@ Ringcaptcha._render_phone_slide();
         jx.setRequestHeader("Content-Type","text/plain");
         jx.onreadystatechange = function() {
           if(jx.readyState == 4 && jx.status == 200 && typeof o.success !== "undefined"){ 
-            document.body.dispatchEvent(RingcaptchaEvents.successfulPinRequestSentEvent);
+            if(u.split("/")[u.split("/").length-1] === "code") document.body.dispatchEvent(RingcaptchaEvents.successfulPinRequestSentEvent);
             o.success(jx);
             
           }else if(jx.readyState == 4 && typeof o.error !== "undefined") o.error(jx);
