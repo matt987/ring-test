@@ -79,13 +79,6 @@
         document.body.dispatchEvent(RingcaptchaEvents.retryRequestedEvent);
       }
 
-  Ringcaptcha.isPhoneValid = function (p) {
-    var a = /^\+?([0-9])*$/;
-    p = p.trim();
-    bool = (p.length && p.match(a));
-    if (!bool) document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
-    return bool;
-  }
 
   Ringcaptcha.processPhoneNumber = function (e) {
     document.getElementById("ringcaptcha_verify_button").focus();
@@ -103,6 +96,7 @@
     z = a('ringcaptcha_example_phone'),
     g = y + f.value.trim();
     if (!Ringcaptcha.isPhoneValid(f.value) || (f.value.length <=4)) {
+      document.body.dispatchEvent(RingcaptchaEvents.invalidNumberEnteredEvent);
       z.className = 'helptxt helptxterr';
       f.className = "error";
       f.value = RingcaptchaStr.invalid_phone;
