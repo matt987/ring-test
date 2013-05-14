@@ -237,16 +237,6 @@ Ringcaptcha._render_phone_slide();
     });
 
 
-
-    $.fn.onInvalidNumberEnteredEvent = function(custom_function){  
-      $(this).addEventListener("onInvalidNumberEntered",  custom_function()});  
-    }; 
-    $('body').onInvalidNumberEnteredEvent(function(){
-      alert("Invalid number from jquery");
-    })
-
-
-
     document.body.addEventListener("onWidgetDisplayed", function(e) {
       // Obtenemos como parámetro el Evento (e)
       console.info("Event is: ", e);
